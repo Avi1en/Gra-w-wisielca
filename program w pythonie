@@ -1,0 +1,48 @@
+import random
+
+def choose_word():
+    # Lista słów do gry
+    words = ["python", "programming", "hangman", "challenge", "developer", "computer", "keyboard"]
+    return random.choice(words).lower()
+
+def display_progress(word, guessed_letters):
+    # Pokazuje postęp w odgadywaniu słowa
+    return " ".join(letter if letter in guessed_letters else "_" for letter in word)
+
+def play_hangman():
+    print("Witaj w grze Wisielec!")
+    word = choose_word()
+    guessed_letters = set()
+    attempts = 6  # Liczba dozwolonych pomyłek
+    
+    while attempts > 0:
+        print("\nSłowo:", display_progress(word, guessed_letters))
+        print(f"Pozostałe próby: {attempts}")
+        print("Odgadnięte litery:", " ".join(sorted(guessed_letters)) if guessed_letters else "Brak")
+
+        guess = input("Zgadnij literę: ").lower()
+        
+        if len(guess) != 1 or not guess.isalpha():
+            print("Proszę wprowadzić jedną literę!")
+            continue
+
+        if guess in guessed_letters:
+            print("Już zgadłeś tę literę!")
+            continue
+
+        guessed_letters.add(guess)
+        
+        if guess in word:
+            print(f"Dobrze! Litera '{guess}' znajduje się w słowie.")
+            if all(letter in guessed_letters for letter in word):
+                print(f"\nGratulacje! Odgadłeś słowo: {word}")
+                break
+        else:
+            print(f"Źle! Litera '{guess}' nie znajduje się w słowie.")
+            attempts -= 1
+
+        if attempts == 0:
+            print(f"\nPrzegrałeś! Słowo to było: {word}")
+
+if __name__ == "__main__":
+    play_hangman()
