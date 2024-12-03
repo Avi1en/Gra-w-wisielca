@@ -2,7 +2,7 @@ import random
 
 def choose_word():
     # Lista słów do gry
-    words = ["python", "programming", "hangman", "challenge", "developer", "computer", "keyboard"]
+    words = ["informatyka", "granie", "myszka", "procesor", "pendrive", "python", "programowanie", "wisielec", "wyzwanie", "deweloper", "komputer", "klawiatura"]
     return random.choice(words).lower()
 
 def display_progress(word, guessed_letters):
